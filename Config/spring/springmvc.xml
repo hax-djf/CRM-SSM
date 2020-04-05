@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+        http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd">
+	
+	<!-- 配置Controller扫描 -->
+	<context:component-scan base-package="com.al.hax.crm.Controller" />
+
+	<!-- 配置注解驱动 -->
+	<mvc:annotation-driven />
+
+	<!-- 配置视图解析器 -->
+	<bean	class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<!-- 前缀 -->
+		<property name="prefix" value="/WEB-INF/jsp/" />
+		<!-- 后缀 -->
+		<property name="suffix" value=".jsp" />
+	</bean>
+	<!--springmvc的第一个知识点： springmvc配置是有一个默认路径操作 这个默认的的路径操作是web-inf下面的有一个driver.xml的文件就可以了  -->
+	<!-- springmvc的第二个知识点:springmvc无法加载js css的标签的问题，这个问题的来源是web.xml中的配置是所有的请求都进入到springmvc中
+		但是springmvc解决不了 这个css js静态资源的加载，可以进行如下的一个配置可以加载静态文件
+	 -->
+	 <!-- 解决无法加载静态编码的问题   正对于这个案例的使用的是*.action来解决-->
+	 <!-- <mvc:default-servlet-handler/> -->
+	 
+	 <!-- 进行baseDict.properties的文件的读取 -->
+	 <context:property-placeholder location="classpath:BaseDict.properties" />
+</beans>
